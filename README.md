@@ -8,12 +8,11 @@ Credentials
 Username: `read.only`  
 Password: `Th1sPassword`  
 
-Relevant Settings,
-```
-Security -> Identity Providers -> SAML Assertion Flow IdP
-Applications -> Applications -> SAML Assertion Flow - IDP
-Applications -> Applications -> SAML Assertion OIDC Flow
-```
+Relevant Settings:
+* Security -> Identity Providers -> SAML Assertion Flow IdP
+* Applications -> Applications -> SAML Assertion Flow - IDP
+* Applications -> Applications -> SAML Assertion OIDC Flow
+
 
 ### To Install
 ```
