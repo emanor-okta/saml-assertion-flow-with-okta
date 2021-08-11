@@ -29,12 +29,28 @@ go run main.go
 Navigate to http://localhost:8080   
 Click `Get Tokens` to start the flow.   
 Use the same Credentials used to login to the Org, `read.only`/`Th1sPassword`  
+    
+     
      
 ## The Flow
-#### http://localhost:8080
-Clicking "Get Tokens" starts by redirecting to the SAML Application `SAML Assertion Flow` by using the embedded URL    
+1. **http://localhost:8080**
+Clicking "Get Tokens" starts by redirecting to the SAML Application 'SAML Assertion Flow' by using the embedded URL    
 `https://dev-96797994.okta.com/home/dev-96797994_samlassertionflowidp_1/0oa1bo87lk9pbiqSE5d7/aln1boe8uoA9lB4YI5d7`    
-#### Applications -> Applications -> SAML Assertion Flow - IDP
-The embedded URL starts an IdP initiated flow.    
-![embedded URL](http://url/to/img.png)
+     
+     
+2. **SAML Assertion Flow - IDP** application starts an IdP initiated flow
+![saml-1](.img/saml-1.png)
+The Destination and Recipient URLs are set for the SAML IdP setup in Okta. The **Single Sign On URL** is set to the application running on localhost so it can pull out the SAML Assertion from the SAML Response.
+![saml-2](.img/saml-2.png)     
+    
+3. **http://localhost:8080/samlresponse** receives the SAML Response and extracts the SAML Assertion.
+Uses the assertion to call the /token endpoint doing an SAML Assertion Flow `https://dev-96797994.okta.com/oauth2/default/v1/token`
+     
+4. **SAML Assertion OIDC Flow** application Verifies the SAML Assertion is valid via the Registered SAML IdP configured in Okta
+     
+5. **SAML Assertion Flow IdP** (Social SAML IdP) verifies the SAML Assertion is  valid
+![oidc](.img/saml-idp.png)  
+     
+6. **SAML Assertion OIDC Flow** application returns tokens to the user application if the assertion was valid
+![oidc](.img/oidc.png)
 
